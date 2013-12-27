@@ -7,6 +7,7 @@ function loadTemplates() {
     templateList.each(function (ind, val) {
 	var templateName = idToName(val.getAttribute('id'));
 	var templateUrl = 'templates/'+templateName+'.html';
+	console.log('loading template '+templateUrl);
 	$.get(templateUrl, function (data) {
 	    $(val).html(data);
 	});
@@ -19,6 +20,7 @@ function compileTemplates() {
     templateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = idToName(val.getAttribute('id'));
+	console.log('compiling template '+templateName);
 	window.templateMap[templateName] = Handlebars.compile(templateText);
     });
 
@@ -26,6 +28,7 @@ function compileTemplates() {
     partialTemplateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = idToName(val.getAttribute('id'));
+	console.log('compiling partial '+templateName);
 	Handlebars.registerPartial(templateName, templateText);
     });
 }
