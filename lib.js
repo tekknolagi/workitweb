@@ -4,7 +4,7 @@ function loadTemplates() {
 	var templateName = val.getAttribute('id').split('-', 1).slice(0, -1);
 	var templateUrl = 'templates/'+templateName+'.html';
 	$.get(templateUrl, function (data) {
-	    $('#'+val+'-template').html(data);
+	    $(val).html(data);
 	});
     });
 }
