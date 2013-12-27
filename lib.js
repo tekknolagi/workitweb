@@ -14,6 +14,7 @@ function compileTemplates() {
     templateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = val.getAttribute('id').split('-', 1);
+	console.log(window.templateMap);
 	window.templateMap[templateName] = Handlebars.compile(templateText);
     });
 
@@ -25,11 +26,11 @@ function compileTemplates() {
     });
 }
 
-window.Template = function(name) {
+window.Template = function (name) {
     return window.templateMap[name];
 }
 
-window.Page = function(page, data) {
+window.Page = function (page, data) {
     if (typeof(data) === 'undefined') data = {};
     return function() { $('#content').html(page(data)) };
 }
