@@ -14,7 +14,7 @@ function loadTemplates() {
 }
 
 function compileTemplates() {
-    var templateList = $('[type*=x-handlebars]');
+    var templateList = $('[type=x-handlebars]');
     window.templateMap = {};
     templateList.each(function (ind, val) {
 	var templateText = val.text;
