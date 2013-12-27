@@ -1,29 +1,27 @@
 function loadTemplates() {
-    var templateList = $("[type*=x-handlebars]");
-    templateList.each(function (ind, val) {
-	var templateUrl = val.getAttribute('src');
-	console.log(templateUrl);
+    var templateList = $('[type*=x-handlebars]');
+    window.templateList.each(function (ind, val) {
+	var templateName = val.getAttribute('id').split('-', 1).slice(0, -1);
+	var templateUrl = 'templates/'+templateName+'.html';
 	$.get(templateUrl, function (data) {
-	    $(val).html(data);
+	    $('#'+val+'-template').html(data);
 	});
     });
 }
 
 function compileTemplates() {
-    var templateList = $("[type*=x-handlebars-template]");
+    var templateList = $('[type*=x-handlebars-template]');
     window.templateMap = {};
     templateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = val.getAttribute('id').split('-', 1);
-	console.log(templateName);
 	window.templateMap[templateName] = Handlebars.compile(templateText);
     });
 
-    var partialTemplateList = $("[type*=x-handlebars-partial]");
+    var partialTemplateList = $('[type*=x-handlebars-partial]');
     partialTemplateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = val.getAttribute('id').split('-', 1);
-	console.log(templateName);
 	Handlebars.registerPartial(templateName, templateText);
     });
 }
