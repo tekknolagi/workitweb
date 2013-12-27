@@ -24,7 +24,7 @@ function loadTemplates() {
 	$.get(templateUrl, function (data) {
 	    var templateText = data;
 
-	    if (templateName.toString().endsWith('partial')) {	
+	    if (templateName.endsWith('partial')) {	
 		console.log('compiling partial '+templateName);
 		compilePartialTemplate(templateName, data);
 	    }
