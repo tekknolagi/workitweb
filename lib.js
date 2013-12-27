@@ -1,7 +1,11 @@
+function idToName(id) {
+    return id.split('-').slice(0, -1).join('-');
+}
+
 function loadTemplates() {
     var templateList = $('[type*=x-handlebars]');
     templateList.each(function (ind, val) {
-	var templateName = val.getAttribute('id').split('-', 1).slice(0, -1);
+	var templateName = idToName(val.getAttribute('id'));
 	var templateUrl = 'templates/'+templateName+'.html';
 	$.get(templateUrl, function (data) {
 	    $(val).html(data);
@@ -14,14 +18,14 @@ function compileTemplates() {
     window.templateMap = {};
     templateList.each(function (ind, val) {
 	var templateText = val.text;
-	var templateName = val.getAttribute('id').split('-', 1);
+	var templateName = idToName(val.getAttribute('id'));
 	window.templateMap[templateName] = Handlebars.compile(templateText);
     });
 
     var partialTemplateList = $('[type*=x-handlebars-partial]');
     partialTemplateList.each(function (ind, val) {
 	var templateText = val.text;
-	var templateName = val.getAttribute('id').split('-', 1);
+	var templateName = idToName(val.getAttribute('id'));
 	Handlebars.registerPartial(templateName, templateText);
     });
 }
