@@ -1,6 +1,6 @@
 function loadTemplates() {
     var templateList = $('[type*=x-handlebars]');
-    window.templateList.each(function (ind, val) {
+    templateList.each(function (ind, val) {
 	var templateName = val.getAttribute('id').split('-', 1).slice(0, -1);
 	var templateUrl = 'templates/'+templateName+'.html';
 	$.get(templateUrl, function (data) {
