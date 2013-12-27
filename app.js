@@ -17,6 +17,7 @@ $(document).ready(function() {
     }
 
     routie({
+	'/ index': Page(Template('login'));
 	'register': Page(Template('register'), {name: 'Max'}),
 	'aloha': function() {
 	    $('#greeter').html('Welcome to Hawaii!');
@@ -24,6 +25,7 @@ $(document).ready(function() {
 	'greet/:name': function(name) {
 	    Page(Template('greeter'), {name: name})();
 	}
+	routie('/');
     });
 
 });
