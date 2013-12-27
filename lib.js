@@ -15,7 +15,7 @@ function loadTemplates() {
 }
 
 function compileTemplates() {
-    var templateList = $('[type=x-handlebars]');
+    var templateList = $('[type=text/x-handlebars]');
     window.templateMap = {};
     templateList.each(function (ind, val) {
 	var templateText = val.text;
@@ -24,7 +24,7 @@ function compileTemplates() {
 	window.templateMap[templateName] = Handlebars.compile(templateText);
     });
 
-    var partialTemplateList = $('[type=x-handlebars-partial]');
+    var partialTemplateList = $('[type=text/x-handlebars-partial]');
     partialTemplateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = idToName(val.getAttribute('id'));
