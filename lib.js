@@ -26,11 +26,11 @@ function loadTemplates() {
 
 	    if (templateName.endsWith('partial')) {	
 		console.log('compiling partial '+templateName);
-		compilePartialTemplate(templateName, data);
+		compilePartialTemplate(templateName, templateText);
 	    }
 	    else {
 		console.log('compiling template '+templateName);
-		compileTemplate(templateName, data);
+		compileTemplate(templateName, templateText);
 	    }
 	});
     });
