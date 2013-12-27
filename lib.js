@@ -22,14 +22,15 @@ function loadTemplates() {
 	var templateUrl = 'templates/'+templateName+'.html';
 	console.log('loading template '+templateUrl);
 	$.get(templateUrl, function (data) {
-	    $(val).html(data);
+	    var templateText = data;
+
 	    if (templateName.toString().endsWith('partial')) {	
 		console.log('compiling partial '+templateName);
-		compilePartialTemplate(templateName, templateText);
+		compilePartialTemplate(templateName, data);
 	    }
 	    else {
 		console.log('compiling template '+templateName);
-		compileTemplate(templateName, templateText);
+		compileTemplate(templateName, data);
 	    }
 	});
     });
