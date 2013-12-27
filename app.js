@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    var templateList = $("[type='text/x-handlebars-template']");
+    loadTemplates();
+
+    var templateList = $("[type*=x-handlebars-template]");
     var templateMap = {};
     templateList.each(function (ind, val) {
 	var templateText = val.text;
@@ -7,7 +9,7 @@ $(document).ready(function() {
 	templateMap[templateName] = Handlebars.compile(templateText);
     });
 
-    var partialTemplateList = $("[type='text/x-handlebars-partial-template']");
+    var partialTemplateList = $("[type*=x-handlebars-partial-template]");
     partialTemplateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = val.getAttribute('id').split('-', 1);
@@ -24,7 +26,7 @@ $(document).ready(function() {
     }
         
     routie({
-	'': loadTemplates,//Page(Template('login')),
+	'': Page(Template('home')),
 	'aloha': function() {
 	    $('#content').html('Welcome to Hawaii!');
 	},
