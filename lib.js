@@ -23,7 +23,7 @@ function loadTemplates() {
 	console.log('loading template '+templateUrl);
 	$.get(templateUrl, function (data) {
 	    $(val).html(data);
-	    if (templateName.endsWith('partial')) {	
+	    if (templateName.toString().endsWith('partial')) {	
 		console.log('compiling partial '+templateName);
 		compilePartialTemplate(templateName, templateText);
 	    }
