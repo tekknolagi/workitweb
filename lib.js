@@ -2,6 +2,7 @@ function loadTemplates() {
     var templateList = $("[type*=x-handlebars]");
     templateList.each(function (ind, val) {
 	var templateUrl = val.getAttribute('src');
+	console.log(templateUrl);
 	$.get(templateUrl, function (data) {
 	    $(val).html(data);
 	});
@@ -14,7 +15,7 @@ function compileTemplates() {
     templateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = val.getAttribute('id').split('-', 1);
-	console.log(window.templateMap);
+	console.log(templateName);
 	window.templateMap[templateName] = Handlebars.compile(templateText);
     });
 
@@ -22,6 +23,7 @@ function compileTemplates() {
     partialTemplateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = val.getAttribute('id').split('-', 1);
+	console.log(templateName);
 	Handlebars.registerPartial(templateName, templateText);
     });
 }
