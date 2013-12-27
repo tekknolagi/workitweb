@@ -1,4 +1,5 @@
+loadTemplates();
+
 $(document).ready(function() {
-    loadTemplates();
     setupRouter();
 });
