@@ -1,8 +1,9 @@
 <html>
   <head>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.2.1/handlebars.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.2.1/handlebars.min.js"></script>
   <script type="text/javascript" src="assets/routie.js"></script>
+  <script type="text/javascript" src="lib.js"></script>
   <script type="text/javascript" src="app.js"></script>
   </head>
 
@@ -11,16 +12,8 @@
     </div>
   </body>
 
-  <script id="register-template" class="template" type="text/x-handlebars-template">
-    <form name="register">
-    </form>
-  </script>
+  <script id="home-template" src="templates/home.html" type="text/x-handlebars"></script>
 
-  <script id="login-template" class="template" type="text/x-handlebars-template">
-    BOO
-  </script>
-
-  <script id="greeter-template" class="template" type="text/x-handlebars-template">
-    Hello, {{ name }}!
-  </script>
+  <script id="register-partial-template" src="templates/register-partial.html" type="text/x-handlebars-partial"></script>
+  <script id="login-partial-template" src="templates/login-partial.html" type="text/x-handlebars-partial"></script>
 </html>
