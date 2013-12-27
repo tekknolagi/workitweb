@@ -1,5 +1,5 @@
 String.prototype.endsWith = function(suffix) {
-    return this.toString().indexOf(suffix, this.length - suffix.length) !== -1;
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
 }
 
 function idToName(id) {
@@ -23,7 +23,7 @@ function loadTemplates() {
 	console.log('loading template '+templateUrl);
 	$.get(templateUrl, function (data) {
 	    $(val).html(data);
-	    if (templateName.endswith('partial')) {	
+	    if (templateName.endsWith('partial')) {	
 		console.log('compiling partial '+templateName);
 		compilePartialTemplate(templateName, templateText);
 	    }
