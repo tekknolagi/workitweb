@@ -19,7 +19,7 @@ function compileTemplates() {
 	window.templateMap[templateName] = Handlebars.compile(templateText);
     });
 
-    var partialTemplateList = $("[type*=x-handlebars-partial-template]");
+    var partialTemplateList = $("[type*=x-handlebars-partial]");
     partialTemplateList.each(function (ind, val) {
 	var templateText = val.text;
 	var templateName = val.getAttribute('id').split('-', 1);
