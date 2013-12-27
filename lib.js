@@ -1,5 +1,5 @@
 String.prototype.endsWith = function(suffix) {
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    return this.toString().indexOf(suffix, this.length - suffix.length) !== -1;
 }
 
 function idToName(id) {
