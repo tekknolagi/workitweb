@@ -38,6 +38,6 @@ window.Template = function (name) {
 }
 
 window.Page = function (page, data) {
-    if (typeof(data) === 'undefined') data = {};
+    data = data || {};
     return function() { $('#content').html(page(data)) };
 }
