@@ -38,7 +38,7 @@ function loadTemplates () {
 function makeRequest (version, url, data, callback) {
     callback = callback || function () {};
     data = data || {};
-    $.post('http://jobspot.net/'+version+'/'+url, data).done(callback);
+    $.post('http://jobspot.net/'+version+'/'+url, data, callback, "json");
 }
 
 function Template (name) {
