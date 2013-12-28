@@ -1,20 +1,20 @@
-String.prototype.endsWith = function(suffix) {
+String.prototype.endsWith = function (suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 }
 
-function idToName(id) {
+function idToName (id) {
     return id.split('-').slice(0, -1).join('-');
 }
 
-function compileTemplate(templateName, templateText) {
+function compileTemplate (templateName, templateText) {
     window.templateMap[templateName] = Handlebars.compile(templateText);
 }
 
-function compilePartialTemplate(templateName, templateText) {
+function compilePartialTemplate (templateName, templateText) {
     Handlebars.registerPartial(templateName, templateText);
 }
 
-function loadTemplates() {
+function loadTemplates () {
     var templateList = $('[type*=x-handlebars]');
     window.templateMap = {};
     templateList.each(function (ind, val) {
@@ -35,11 +35,11 @@ function loadTemplates() {
     });
 }
 
-window.Template = function (name) {
+function Template (name) {
     return window.templateMap[name];
 }
 
-window.Page = function (page, data) {
+function Page (page, data) {
     data = data || {};
     return function() { $('#content').html(page(data)) };
 }
