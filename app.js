@@ -6,7 +6,7 @@ $(document).ready(function() {
     var loginForm = $('form[name=login]');
     loginForm.submit(function () {
 	makeRequest('v1', 'get_auth_token', loginForm.serialize(), function (data) {
-	    $('#result').text(JSON.stringify(data));
+	    $('#result').html(JSON.stringify(data));
 	});
 	return false;
     });
