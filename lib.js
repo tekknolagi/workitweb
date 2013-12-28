@@ -35,6 +35,12 @@ function loadTemplates () {
     });
 }
 
+function makeRequest (url, data, callback) {
+    callback = callback || function () {};
+    data = data || {};
+    $.post(url, data).done(callback);
+}
+
 function Template (name) {
     return window.templateMap[name];
 }
