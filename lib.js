@@ -20,7 +20,6 @@ function loadTemplates() {
     templateList.each(function (ind, val) {
 	var templateName = idToName(val.getAttribute('id'));
 	var templateUrl = 'templates/'+templateName+'.html';
-	console.log('loading template '+templateUrl);
 	$.get(templateUrl, function (data) {
 	    var templateText = data;
 
