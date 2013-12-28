@@ -35,10 +35,10 @@ function loadTemplates () {
     });
 }
 
-function makeRequest (url, data, callback) {
+function makeRequest (version, url, data, callback) {
     callback = callback || function () {};
     data = data || {};
-    $.post(url, data).done(callback);
+    $.post('http://jobspot.net/'+version+'/'+url, data).done(callback);
 }
 
 function Template (name) {
