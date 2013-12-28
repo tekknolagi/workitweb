@@ -1,3 +1,75 @@
+window.JOBSPOT_VERSION = 'v1';
+
+window.flashMessageKeys = {
+    login_success: 'You have successfully logged in.',
+    login_failure: 'Something went wrong with your login.',
+    register_success: 'You have successfully registered.',
+    register_failure: 'Something went wrong with your registration.',
+    me_failure: "You don't have permission to access that.",
+};
+
+$.cookie.json = true;
+
+window.pageJavascript = {
+    home: function () {
+	loadPage('home')();
+	$('form[name=login] input[name=username]').focus();
+
+	var loginForm = $('form[name=login]');
+	loginForm.submit(function () {
+	    makeRequest(JOBSPOT_VERSION, 'get_auth_token', loginForm.serialize(), function (data) {
+		if (data.success) {
+		    $.cookie('jobspot_user', {
+			username: data.comment,
+			auth_token: data.response
+		    });
+		    flashMessage('login_success');
+		    routie('dash');
+		}
+		else flashMessage('login_failure', data.comment);
+	    });
+	    return false;
+	});
+
+	var registerForm = $('form[name=register]');
+	registerForm.submit(function () {
+	    makeRequest(JOBSPOT_VERSION, 'register', registerForm.serialize(), function (data) {
+		if (data.success) {
+		    $.cookie('jobspot_user', {
+			username: data.comment,
+			auth_token: data.response
+		    });
+		    flashMessage('register_success');
+		}
+		else flashMessage('register_failure', data.comment);
+	    });
+	});
+    },
+    dash: function () {
+	var userObject = $.cookie('jobspot_user');
+	if (userObject == undefined || userObject.auth_token == undefined) routie('');
+
+	makeRequest(JOBSPOT_VERSION, 'user/me', userObject, function (data) {
+	    if (data.success) {
+		$.cookie('jobspot_userdata', data.response);
+	    }
+	    else flashMessage('me_failure');
+	});
+						 
+	loadPage('dash', {
+	    auth_token: $.cookie('jobspot_auth_token'),
+	    user_data: $.cookie('jobspot_userdata')
+	})();
+    },
+    logout: function () {
+	var cookies = $.cookie();
+	for (var cookie in cookies) {
+	    $.removeCookie(cookie);
+	}
+	routie('');
+    }
+}
+
 String.prototype.endsWith = function (suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 }
@@ -41,11 +113,20 @@ function makeRequest (version, url, data, callback) {
     $.post('http://jobspot.net/'+version+'/'+url, data).done(callback);
 }
 
-function Template (name) {
-    return window.templateMap[name];
+function flashMessage (key, extra) {
+    extra = extra || "";
+    flash = $('#flash');
+    flash.html(flashMessageKeys[key]+" "+extra);
+    flash.fadeIn(400).delay(5000).fadeOut(400);
 }
 
-function Page (page, data) {
+function Page (name, page, data) {
+    return function () {
+	$('#content').html(page(data));
+    };
+}
+
+function loadPage (name, data) {
     data = data || {};
-    return function() { $('#content').html(page(data)) };
+    return Page(name, templateMap[name], data);
 }
