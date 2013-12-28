@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $.ajax({async: false});
+    $.ajaxSetup({async: false});
     loadTemplates();
     setupRouter();
 });
